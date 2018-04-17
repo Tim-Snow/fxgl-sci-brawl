@@ -1,0 +1,6 @@
+class StartScreen {
+
+    StartScreen() {
+
+    }
+}
