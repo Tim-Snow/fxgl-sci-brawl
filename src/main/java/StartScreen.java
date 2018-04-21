@@ -1,6 +1,0 @@
-class StartScreen {
-
-    StartScreen() {
-
-    }
-}
