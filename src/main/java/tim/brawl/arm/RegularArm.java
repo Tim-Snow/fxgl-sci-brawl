@@ -5,8 +5,6 @@ import javafx.scene.Node;
 
 public class RegularArm extends Arm {
 
-    private boolean isDucking = false;
-
     private Node armL, armR, bentArm;
 
     public RegularArm() {
@@ -30,20 +28,23 @@ public class RegularArm extends Arm {
     }
 
     public void stand() {
-        if (isDucking) {
-            bentArm.setVisible(false);
-            armL.setVisible(true);
-            armR.setVisible(true);
-            isDucking = false;
-        }
+        bentArm.setVisible(false);
+        armL.setVisible(true);
+        armR.setVisible(true);
     }
 
     public void duck() {
-        if (!isDucking) {
-            bentArm.setVisible(true);
-            armL.setVisible(false);
-            armR.setVisible(false);
-            isDucking = true;
+        bentArm.setVisible(true);
+        armL.setVisible(false);
+        armR.setVisible(false);
+    }
+
+    @Override
+    public void changeDirection(boolean facingLeft) {
+        if (facingLeft) {
+            bentArm.setScaleX(-1);
+        } else {
+            bentArm.setScaleX(1);
         }
     }
 }

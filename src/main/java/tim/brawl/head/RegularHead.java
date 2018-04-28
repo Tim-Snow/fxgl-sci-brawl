@@ -1,11 +1,12 @@
 package tim.brawl.head;
 
 import com.almasb.fxgl.app.FXGL;
-import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.texture.Texture;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+
+import static com.almasb.fxgl.physics.BoundingShape.box;
 
 public class RegularHead extends Head {
 
@@ -27,7 +28,7 @@ public class RegularHead extends Head {
         head.setTranslateX(xOffset);
         head.setTranslateY(yOffset);
 
-        hitBox = new HitBox(new Point2D(xOffset, yOffset), BoundingShape.box(headT.getWidth(), headT.getHeight()));
+        hitBox = new HitBox(new Point2D(xOffset, yOffset), box(headT.getWidth(), headT.getHeight()));
 
         this.addNode(head);
     }
@@ -48,5 +49,18 @@ public class RegularHead extends Head {
 
     public HitBox getHitBox() {
         return hitBox;
+    }
+
+    @Override
+    public void changeDirection(boolean facingLeft) {
+        if (facingLeft) {
+            head.setScaleX(-1);
+            head.setRotate(-90);
+            head.setTranslateX(-head.getTranslateX());
+        } else {
+            head.setScaleX(1);
+            head.setRotate(90);
+            head.setTranslateX(-head.getTranslateX());
+        }
     }
 }

@@ -10,4 +10,6 @@ public abstract class Head extends EntityView {
     public abstract void duck();
 
     public abstract HitBox getHitBox();
+
+    public abstract void changeDirection(boolean facingLeft);
 }

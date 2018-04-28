@@ -5,4 +5,6 @@ import com.almasb.fxgl.physics.HitBox;
 
 public abstract class Leg extends EntityView {
     public abstract HitBox getHitBox();
+
+    public abstract void changeDirection(boolean facingLeft);
 }

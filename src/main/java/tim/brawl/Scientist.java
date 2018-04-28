@@ -18,6 +18,8 @@ import static com.almasb.fxgl.physics.box2d.dynamics.BodyType.DYNAMIC;
 
 class Scientist {
 
+    private boolean isDucking = false, facingLeft = false;
+
     private PhysicsComponent physicsComponent;
 
     private Entity entity;
@@ -52,7 +54,16 @@ class Scientist {
     void update(ControllerState state, double tpf) {
         float DEAD_ZONE = 0.2f;
         if (state.leftStickX >= DEAD_ZONE || state.leftStickX <= -DEAD_ZONE) {
-            physicsComponent.setVelocityX(state.leftStickX * (tpf * 10000));
+            boolean preFacingLeft = facingLeft;
+            facingLeft = !(state.leftStickX > 0);
+
+            if (preFacingLeft != facingLeft) {
+                changeDirection();
+            }
+
+            if (!isDucking) {
+                physicsComponent.setVelocityX(state.leftStickX * (tpf * 10000));
+            }
         } else {
             physicsComponent.setVelocityX(0);
         }
@@ -66,6 +77,13 @@ class Scientist {
             stand();
     }
 
+    private void changeDirection() {
+        body.changeDirection(facingLeft);
+        head.changeDirection(facingLeft);
+        arm.changeDirection(facingLeft);
+        leg.changeDirection(facingLeft);
+    }
+
     private void jump() {
         if (physicsComponent.isOnGround()) {
             physicsComponent.setVelocityY(-300);
@@ -73,14 +91,20 @@ class Scientist {
     }
 
     private void stand() {
-        body.stand();
-        arm.stand();
-        head.stand();
+        if (isDucking) {
+            body.stand();
+            arm.stand();
+            head.stand();
+            isDucking = false;
+        }
     }
 
     private void duck() {
-        body.duck();
-        arm.duck();
-        head.duck();
+        if (!isDucking) {
+            body.duck();
+            arm.duck();
+            head.duck();
+            isDucking = true;
+        }
     }
 }
