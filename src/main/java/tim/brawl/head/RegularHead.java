@@ -1,22 +1,39 @@
-package tim.brawl;
+package tim.brawl.head;
 
-import com.almasb.fxgl.core.math.Vec2;
-import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.GameWorld;
+import com.almasb.fxgl.app.FXGL;
+import javafx.scene.Node;
 
-import static com.almasb.fxgl.entity.Entities.builder;
+public class RegularHead extends Head {
 
-class RegularHead implements Head {
+    private boolean isDucking = false;
 
-    private Vec2 position;
+    private Node head;
 
-    RegularHead(GameWorld gameWorld, Vec2 position) {
-        this.position = position;
+    public RegularHead() {
+        int xOffset = 9;
+        int yOffset = 11;
 
-        Entity entity = builder()
-//            .type(PLAYER)
-                .at(this.position)
-                .viewFromTextureWithBBox("scientist/head/side.png")
-                .buildAndAttach(gameWorld);
+        head = FXGL.getAssetLoader().loadTexture("scientist/head/side.png");
+        head.setRotate(45);
+        head.setVisible(false);
+
+        head.setTranslateX(xOffset);
+        head.setTranslateY(yOffset);
+
+        this.addNode(head);
+    }
+
+    public void stand() {
+        if (isDucking) {
+            head.setVisible(false);
+            isDucking = false;
+        }
+    }
+
+    public void duck() {
+        if (!isDucking) {
+            head.setVisible(true);
+            isDucking = true;
+        }
     }
 }

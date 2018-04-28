@@ -1,21 +1,18 @@
 package tim.brawl;
 
 import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.settings.GameSettings;
-import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
+import com.studiohartman.jamepad.ControllerManager;
 
-import static tim.brawl.ControllerManager.searchForControllers;
+import static javafx.scene.paint.Color.BLACK;
 
 public class Application extends GameApplication {
 
-    StartScreen startScreen;
+    private StartScreen startScreen;
+    private ControllerManager controllers;
 
     public static void main(String[] args) {
-        ControllerManager.init();
         launch(args);
-        //todo: make scene manager
     }
 
     @Override
@@ -35,37 +32,38 @@ public class Application extends GameApplication {
     protected void initInput() {
         super.initInput();
 
-        getInput().addAction(new UserAction("") {
+/*        getInput().addAction(new UserAction("") {
             @Override
             protected void onAction() {
                 super.onAction();
-                searchForControllers();
             }
-        }, KeyCode.ENTER);
+        }, ControllerButton.A);*/
     }
 
     @Override
     protected void initGame() {
-        searchForControllers();
+        controllers = new ControllerManager();
+        controllers.initSDLGamepad();
 
-        startScreen = new StartScreen(getGameWorld());
+        startScreen = new StartScreen(getGameScene());
+
+        getGameWorld().addEntityFactory(new ScientistEntityFactory());
+
+        getGameWorld().setLevelFromMap("tiled.json");
     }
 
     @Override
     protected void initUI() {
         super.initUI();
 
-        getGameScene().setBackgroundColor(Color.BLACK);
+        getGameScene().setBackgroundColor(BLACK);
     }
 
     @Override
     protected void onUpdate(double tpf) {
         super.onUpdate(tpf);
 
-        for (int i = 0; i < ControllerManager.totalControllers; i++) {
-            if(ControllerManager.getPressed(i).get(BUTTONS.START)) {
-                startScreen.spawnScientist();
-            }
-        }
+        controllers.update();
+        startScreen.update(controllers, tpf);
     }
 }

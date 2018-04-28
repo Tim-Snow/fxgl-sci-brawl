@@ -1,33 +1,27 @@
-package tim.brawl;
+package tim.brawl.leg;
 
-import com.almasb.fxgl.core.math.Vec2;
-import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.GameWorld;
+import com.almasb.fxgl.app.FXGL;
+import com.almasb.fxgl.physics.BoundingShape;
+import com.almasb.fxgl.physics.HitBox;
+import javafx.scene.Node;
 
-import static com.almasb.fxgl.entity.Entities.builder;
+public class RegularLeg extends Leg {
 
-class RegularLeg implements Leg {
+    public RegularLeg() {
 
-    private Vec2 position;
+        int xOffset = 5;
+        int yOffset = 35;
 
-    RegularLeg(GameWorld gameWorld, Vec2 position) {
-        this.position = position;
+        Node legL = FXGL.getAssetLoader().loadTexture("scientist/leg/idle.png");
+        HitBox hitBox = new HitBox(BoundingShape.box(10, 10));
+        legL.setTranslateX(xOffset - 3);
+        legL.setTranslateY(yOffset);
 
-        Entity legL = builder()
-//            .type(PLAYER)
-                .at(this.position.x - 3, this.position.y)
-                .viewFromTextureWithBBox("scientist/leg/idle.png")
-                .buildAndAttach(gameWorld);
+        Node legR = FXGL.getAssetLoader().loadTexture("scientist/leg/idle.png");
+        legR.setTranslateX(xOffset + 3);
+        legR.setTranslateY(yOffset);
 
-        Entity legR = builder()
-//            .type(PLAYER)
-                .at(this.position.x + 3, this.position.y)
-                .viewFromTextureWithBBox("scientist/leg/idle.png")
-                .buildAndAttach(gameWorld);
-    }
-
-    @Override
-    public void update() {
-
+        this.addNode(legL);
+        this.addNode(legR);
     }
 }

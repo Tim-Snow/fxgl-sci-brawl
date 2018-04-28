@@ -1,4 +1,4 @@
-package tim.brawl;
+package tim.brawl.weapon;
 
 public interface Weapon {
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="10" tilewidth="70" tileheight="70" infinite="0" nextobjectid="7">
+ <tileset firstgid="1" name="tiles_spritesheet" tilewidth="70" tileheight="70" spacing="2" tilecount="156" columns="12">
+  <image source="../../../../../../../Game resources/tiles_spritesheet.png" width="914" height="936"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="15" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,111,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,111,111,111,111,
+0,0,0,0,0,0,0,0,0,0,111,0,0,0,0,
+111,111,111,111,111,111,111,111,111,111,111,111,111,111,111
+</data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object id="1" type="platform" x="1" y="634" width="1047" height="65"/>
+  <object id="2" type="platform" x="701" y="560" width="69" height="72"/>
+  <object id="3" type="platform" x="771" y="490" width="279" height="69"/>
+  <object id="4" type="platform" x="911" y="351" width="68" height="68"/>
+ </objectgroup>
+</map>

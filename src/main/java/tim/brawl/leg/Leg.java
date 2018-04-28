@@ -1,5 +1,6 @@
-package tim.brawl;
+package tim.brawl.leg;
 
-public interface Leg {
-    void update();
+import com.almasb.fxgl.entity.view.EntityView;
+
+public abstract class Leg extends EntityView {
 }

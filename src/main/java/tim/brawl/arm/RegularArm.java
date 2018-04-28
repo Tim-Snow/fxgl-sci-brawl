@@ -1,33 +1,49 @@
-package tim.brawl;
+package tim.brawl.arm;
 
-import com.almasb.fxgl.core.math.Vec2;
-import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.GameWorld;
+import com.almasb.fxgl.app.FXGL;
+import javafx.scene.Node;
 
-import static com.almasb.fxgl.entity.Entities.builder;
+public class RegularArm extends Arm {
 
-class RegularArm implements Arm {
+    private boolean isDucking = false;
 
-    private Vec2 position;
+    private Node armL, armR, bentArm;
 
-    RegularArm(GameWorld gameWorld, Vec2 position) {
-        this.position = position;
+    public RegularArm() {
+        int yOffset = 13;
+        int xOffset = 5;
 
-        Entity armL = builder()
-//            .type(PLAYER)
-                .at(this.position.x - 5, this.position.y)
-                .viewFromTextureWithBBox("scientist/arm/idle.png")
-                .buildAndAttach(gameWorld);
+        bentArm = FXGL.getAssetLoader().loadTexture("scientist/arm/holding.png");
+        bentArm.setTranslateY(yOffset);
+        bentArm.setVisible(false);
 
-        Entity armR = builder()
-//            .type(PLAYER)
-                .at(this.position.x + 5, this.position.y)
-                .viewFromTextureWithBBox("scientist/arm/idle.png")
-                .buildAndAttach(gameWorld);
+        armL = FXGL.getAssetLoader().loadTexture("scientist/arm/idle.png");
+        armL.setTranslateX(xOffset - 5);
+        armL.setTranslateY(yOffset);
+
+        armR = FXGL.getAssetLoader().loadTexture("scientist/arm/idle.png");
+        armR.setTranslateX(10);
+        armR.setTranslateY(yOffset);
+
+        this.addNode(armL);
+        this.addNode(armR);
     }
 
-    @Override
-    public void update() {
+    public void stand() {
+        if (isDucking) {
+            bentArm.setVisible(false);
+            armL.setVisible(true);
+            armR.setVisible(true);
+            isDucking = false;
+        }
+    }
 
+    public void duck() {
+        if (!isDucking) {
+            bentArm.setVisible(true);
+            armL.setVisible(false);
+            armR.setVisible(false);
+            isDucking = true;
+        }
     }
 }
