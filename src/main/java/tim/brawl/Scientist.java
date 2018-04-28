@@ -3,11 +3,7 @@ package tim.brawl;
 import com.almasb.fxgl.core.math.Vec2;
 import com.almasb.fxgl.entity.Entities;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.physics.BoundingShape;
-import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
-import com.almasb.fxgl.physics.box2d.dynamics.BodyDef;
-import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import com.studiohartman.jamepad.ControllerState;
 import javafx.scene.Group;
 import tim.brawl.arm.Arm;
@@ -17,6 +13,8 @@ import tim.brawl.head.Head;
 import tim.brawl.head.RegularHead;
 import tim.brawl.leg.Leg;
 import tim.brawl.leg.RegularLeg;
+
+import static com.almasb.fxgl.physics.box2d.dynamics.BodyType.DYNAMIC;
 
 class Scientist {
 
@@ -35,12 +33,15 @@ class Scientist {
         head = new RegularHead();
 
         physicsComponent = new PhysicsComponent();
-        physicsComponent.setBodyType(BodyType.DYNAMIC);
+        physicsComponent.setBodyType(DYNAMIC);
+        physicsComponent.setGenerateGroundSensor(true);
 
         entity = Entities.builder()
                 .at(position)
                 .with(physicsComponent)
-                .bbox(new HitBox(BoundingShape.box(10, 45)))
+                .bbox(leg.getHitBox())
+                .bbox(head.getHitBox())
+                .bbox(body.getHitBox())
                 .buildAndAttach();
 
         Group group = new Group(head, leg, body, arm);
@@ -66,7 +67,9 @@ class Scientist {
     }
 
     private void jump() {
-        physicsComponent.setVelocityY(-300);
+        if (physicsComponent.isOnGround()) {
+            physicsComponent.setVelocityY(-300);
+        }
     }
 
     private void stand() {

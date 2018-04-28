@@ -1,6 +1,10 @@
 package tim.brawl.head;
 
 import com.almasb.fxgl.app.FXGL;
+import com.almasb.fxgl.physics.BoundingShape;
+import com.almasb.fxgl.physics.HitBox;
+import com.almasb.fxgl.texture.Texture;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 
 public class RegularHead extends Head {
@@ -8,17 +12,22 @@ public class RegularHead extends Head {
     private boolean isDucking = false;
 
     private Node head;
+    private HitBox hitBox;
 
     public RegularHead() {
         int xOffset = 9;
         int yOffset = 11;
 
-        head = FXGL.getAssetLoader().loadTexture("scientist/head/side.png");
+        Texture headT = FXGL.getAssetLoader().loadTexture("scientist/head/side.png");
+
+        head = headT;
         head.setRotate(45);
         head.setVisible(false);
 
         head.setTranslateX(xOffset);
         head.setTranslateY(yOffset);
+
+        hitBox = new HitBox(new Point2D(xOffset, yOffset), BoundingShape.box(headT.getWidth(), headT.getHeight()));
 
         this.addNode(head);
     }
@@ -35,5 +44,9 @@ public class RegularHead extends Head {
             head.setVisible(true);
             isDucking = true;
         }
+    }
+
+    public HitBox getHitBox() {
+        return hitBox;
     }
 }
