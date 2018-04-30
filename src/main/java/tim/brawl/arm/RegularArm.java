@@ -5,6 +5,8 @@ import javafx.scene.Node;
 
 public class RegularArm extends Arm {
 
+    private boolean holdingWeapon = false;
+
     private Node armL, armR, bentArm;
 
     public RegularArm() {
@@ -37,6 +39,26 @@ public class RegularArm extends Arm {
         bentArm.setVisible(true);
         armL.setVisible(false);
         armR.setVisible(false);
+    }
+
+    public void pickUpWeapon() {
+        if (!holdingWeapon) {
+
+        }
+    }
+
+    @Override
+    public void reload() {
+        if (holdingWeapon) {
+
+        }
+    }
+
+    @Override
+    public void fire() {
+        if (holdingWeapon) {
+
+        } //todo: melee if not?
     }
 
     @Override

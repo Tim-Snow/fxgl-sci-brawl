@@ -3,12 +3,14 @@ package tim.brawl;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.settings.GameSettings;
 import com.studiohartman.jamepad.ControllerManager;
+import javafx.scene.paint.Color;
+import tim.brawl.scenes.StartScene;
 
 import static javafx.scene.paint.Color.BLACK;
 
 public class Application extends GameApplication {
 
-    private StartScreen startScreen;
+    private StartScene startScene;
     private ControllerManager controllers;
 
     public static void main(String[] args) {
@@ -45,7 +47,7 @@ public class Application extends GameApplication {
         controllers = new ControllerManager();
         controllers.initSDLGamepad();
 
-        startScreen = new StartScreen(getGameScene());
+        startScene = new StartScene();
 
         getGameWorld().addEntityFactory(new ScientistEntityFactory());
 
@@ -56,7 +58,7 @@ public class Application extends GameApplication {
     protected void initUI() {
         super.initUI();
 
-        getGameScene().setBackgroundColor(BLACK);
+        getGameScene().setBackgroundColor(Color.rgb(33, 255, 33));
     }
 
     @Override
@@ -64,6 +66,6 @@ public class Application extends GameApplication {
         super.onUpdate(tpf);
 
         controllers.update();
-        startScreen.update(controllers, tpf);
+        startScene.update(controllers, tpf);
     }
 }

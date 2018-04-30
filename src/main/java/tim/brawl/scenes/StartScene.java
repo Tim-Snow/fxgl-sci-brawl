@@ -1,25 +1,22 @@
-package tim.brawl;
+package tim.brawl.scenes;
 
 import com.almasb.fxgl.core.math.Vec2;
-import com.almasb.fxgl.scene.GameScene;
 import com.studiohartman.jamepad.ControllerManager;
 import com.studiohartman.jamepad.ControllerState;
+import tim.brawl.Scientist;
 
 import java.util.HashMap;
 import java.util.Map;
 
-class StartScreen {
+public class StartScene {
 
-    private GameScene gameScene;
     private Map<Integer, Scientist> scientists;
 
-    StartScreen(GameScene gameScene) {
-        this.gameScene = gameScene;
-
+    public StartScene() {
         scientists = new HashMap<>();
     }
 
-    void update(ControllerManager controllers, double tpf) {
+    public void update(ControllerManager controllers, double tpf) {
         for (int i = 0; i < scientists.values().size(); i++) {
             scientists.get(i).update(controllers.getState(i), tpf);
         }

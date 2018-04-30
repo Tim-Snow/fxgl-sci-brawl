@@ -63,4 +63,9 @@ public class RegularHead extends Head {
             head.setTranslateX(-head.getTranslateX());
         }
     }
+
+    @Override
+    public void doAction() {
+
+    }
 }

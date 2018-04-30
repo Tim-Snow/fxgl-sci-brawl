@@ -9,4 +9,10 @@ public abstract class Arm extends EntityView {
     public abstract void duck();
 
     public abstract void changeDirection(boolean facingLeft);
+
+    public abstract void pickUpWeapon();
+
+    public abstract void reload();
+
+    public abstract void fire();
 }
