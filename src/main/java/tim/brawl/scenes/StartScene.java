@@ -4,6 +4,7 @@ import com.almasb.fxgl.core.math.Vec2;
 import com.studiohartman.jamepad.ControllerManager;
 import com.studiohartman.jamepad.ControllerState;
 import tim.brawl.Scientist;
+import tim.brawl.weapon.AK47;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,8 @@ public class StartScene {
 
     public StartScene() {
         scientists = new HashMap<>();
+
+        AK47 ak47 = new AK47(new Vec2(500, 500));
     }
 
     public void update(ControllerManager controllers, double tpf) {

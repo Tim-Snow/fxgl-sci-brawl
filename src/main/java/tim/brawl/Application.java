@@ -50,6 +50,7 @@ public class Application extends GameApplication {
         startScene = new StartScene();
 
         getGameWorld().addEntityFactory(new ScientistEntityFactory());
+        getGameWorld().spawn("ak47", 100, 100);
 
         getGameWorld().setLevelFromMap("tiled.json");
     }

@@ -15,4 +15,13 @@ public class ScientistEntityFactory implements EntityFactory {
                 .with(new PhysicsComponent())
                 .build();
     }
+
+    @Spawns("ak47")
+    public Entity newAk47(SpawnData data) {
+        return Entities.builder()
+                .from(data)
+                .viewFromTextureWithBBox("weapons/ak47.png")
+                .with(new PhysicsComponent())
+                .build();
+    }
 }

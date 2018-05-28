@@ -72,9 +72,8 @@ public class Scientist {
                 changeDirection();
             }
 
-            leg.setMoving(true);
-
             if (!isDucking) {
+                leg.setMoving(true);
                 physicsComponent.setVelocityX(state.leftStickX * (tpf * 10000));
             }
         } else {
@@ -82,10 +81,12 @@ public class Scientist {
             physicsComponent.setVelocityX(0);
         }
 
-        if (state.leftStickY <= -0.5)
+        if (state.leftStickY <= -0.5) {
+            leg.setMoving(false);
             duck();
-        else
+        } else {
             stand();
+        }
 
         if (state.rightTrigger >= 0.5)
             arm.fire();

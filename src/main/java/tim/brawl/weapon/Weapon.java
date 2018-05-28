@@ -1,4 +1,8 @@
 package tim.brawl.weapon;
 
-public interface Weapon {
+import com.almasb.fxgl.entity.Entity;
+
+abstract class Weapon extends Entity {
+
+    abstract void fire();
 }
